@@ -9,22 +9,22 @@
 <body>
     <main class="main">
         <h1>Tic-Tac-Toe</h1>
-        <label>Player 1: <input type="text" value="X"></label>
-        <label>Player 2: <input type="text" value="O"></label>
-        <h2 class="status">X's Turn</h2>
+        <label>Player 1: <input id="p1Name" type="text" value="X"></label>
+        <label>Player 2: <input id="p2Name" type="text" value="O"></label>
+        <h2><span id="status">X</span>'s Turn</h2>
         <section class="board">
-            <div class="tile tlc"></div>
-            <div class="tile"></div>
-            <div class="tile trc"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile"></div>
-            <div class="tile blc"></div>
-            <div class="tile"></div>
-            <div class="tile brc"></div>
+            <div data-key="0" class="tile tlc"></div>
+            <div data-key="1" class="tile"></div>
+            <div data-key="2" class="tile trc"></div>
+            <div data-key="3" class="tile"></div>
+            <div data-key="4" class="tile"></div>
+            <div data-key="5" class="tile"></div>
+            <div data-key="6" class="tile blc"></div>
+            <div data-key="7" class="tile"></div>
+            <div data-key="8" class="tile brc"></div>
         </section>
         <button class="start">Restart Game</button>
     </main>
-    
+    <script type="module" src="tttgame.js"></script>
 </body>
 </html>
