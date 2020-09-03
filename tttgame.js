@@ -14,11 +14,18 @@ const Player = (name, marker) => {
 const gameBoard = (() => {
     const board = Array(9).fill("");
 
-    const setSquare = (marker, pos) => {
+    const setSquare = (square, marker, pos, updateTile) => {
+        square.textContent = marker;
+        square.removeEventListener("click", updateTile);
         board[pos] = marker;
     };
-    const resetBoard = () => {
+    const resetBoard = (updateTile) => {
         board.fill("");
+        const squares = document.querySelectorAll(".tile");
+        squares.forEach(square => {
+            square.textContent = "";
+            square.addEventListener("click", updateTile);
+        });
     };
     const checkWinner = (marker) => {
         let winner = false;
@@ -67,12 +74,7 @@ const game = ((gameBoard) => {
     function newGame() {
         document.querySelector("#status").textContent = `'s Turn`;
         showName(players[0].getName());
-        gameBoard.resetBoard();
-        const squares = document.querySelectorAll(".tile");
-        squares.forEach(square => {
-            square.textContent = "";
-            square.addEventListener("click", updateTile);
-        });
+        gameBoard.resetBoard(updateTile);
         turn = 0;
     }
     function updateName(e) {
@@ -88,9 +90,7 @@ const game = ((gameBoard) => {
         const playerNum = (turn % 2 == 0) ? 0 : 1;
         const marker = players[playerNum].getMarker();
 
-        e.target.textContent = marker;
-        gameBoard.setSquare(marker, e.target.dataset.key);
-        e.target.removeEventListener("click", updateTile);
+        gameBoard.setSquare(e.target, marker, e.target.dataset.key, updateTile);
 
         if ( gameBoard.checkWinner(marker) ) {
             endGame(true);
